@@ -15,6 +15,18 @@ defmodule SearchMetrics.Page do
   @css_accessor_link "#overview .x-kpi.mojo .infos .text .link"
   @css_accessor_social "#overview .x-kpi.mojo .infos .text .social"
 
+  @doc """
+  Opens the searchmetrics page for a given domain, provided a Wallaby session
+
+  ## Parameters
+
+    - `session`: a Wallaby session
+    - `domain`: TLD you wish to request
+
+  ## Examples
+
+      iex> SearchMetrics.Page.open_page(session, "google.com")
+  """
   def open_page(session, domain) when domain != "" do
     path = EEx.eval_string(@url, domain: domain)
 
@@ -25,6 +37,9 @@ defmodule SearchMetrics.Page do
     %SearchMetrics.Page{html: html, domain: domain}
   end
 
+  @doc """
+  Get mobility score for `:desktop` or `:mobile`
+  """
   def get_visibility(%SearchMetrics.Page{} = page, :desktop),
     do: page |> get_score(:desktop, @css_accessor_desktop)
 
@@ -42,6 +57,9 @@ defmodule SearchMetrics.Page do
     %SearchMetrics.Page{page | metrics: metrics}
   end
 
+  @doc """
+  Get mojo scores
+  """
   def get_mojo(%SearchMetrics.Page{} = page, :seo),
     do: page |> get_mojo(:seo, @css_accessor_seo)
 
