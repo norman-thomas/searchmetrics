@@ -10,4 +10,5 @@ erl_crash.dump
 /config/*.secret.exs
 
 assets/node_modules
-
+./screens
+phantomjs.log

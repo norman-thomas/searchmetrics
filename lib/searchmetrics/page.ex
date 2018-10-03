@@ -34,7 +34,11 @@ defmodule SearchMetrics.Page do
       session
       |> Wallaby.Browser.visit(path)
 
-    %SearchMetrics.Page{html: html, domain: domain}
+    unless Wallaby.Browser.has_text?(html, "Ihr tägliches Abfragenkontingent ist aufgebraucht") do
+      {:ok, %SearchMetrics.Page{html: html, domain: domain}}
+    else
+      {:error, :request_limit_reached}
+    end
   end
 
   @doc """
@@ -101,9 +105,11 @@ defmodule SearchMetrics.Page do
 
     rank =
       case Regex.scan(regex, text) do
-        [] -> nil
-        [[_, rank]] -> rank |> String.replace(~r/[\#,\.]/, "") |> Integer.parse()
-        _ -> nil
+        [[_, rank]] ->
+          rank |> String.replace(~r/[\#,\.]/, "") |> Integer.parse()
+
+        _ ->
+          nil
       end
 
     case rank do
