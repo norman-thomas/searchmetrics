@@ -13,7 +13,7 @@ defmodule SearchMetrics do
       iex> SearchMetrics.search("google.com")
       %SearchMetrics.Page{
         domain: "grin.com",
-        html: "<!DOCTYPE html>" <> ...,
+        html: "<!DOCTYPE html>",
         metrics: %SearchMetrics.Metrics{
           desktop: 13953,
           link: 2006,
