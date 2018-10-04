@@ -62,7 +62,7 @@ defmodule SearchMetrics.Page do
   end
 
   @doc """
-  Get mojo scores
+  Get mojo scores for `:seo`, `:paid`, `:link`, `:social`
   """
   def get_mojo(%SearchMetrics.Page{} = page, :seo),
     do: page |> get_mojo(:seo, @css_accessor_seo)

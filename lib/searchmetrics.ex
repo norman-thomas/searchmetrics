@@ -10,8 +10,19 @@ defmodule SearchMetrics do
 
   ## Examples
 
-      iex> SearchMetrics.Page.search("google.com")
-      %SearchMetrics.Page{}
+      iex> SearchMetrics.search("google.com")
+      %SearchMetrics.Page{
+        domain: "grin.com",
+        html: "<!DOCTYPE html>" <> ...,
+        metrics: %SearchMetrics.Metrics{
+          desktop: 13953,
+          link: 2006,
+          mobile: 16785,
+          paid: 0,
+          seo: 1910,
+          social: 0
+        }
+      }
 
   """
   def search(domain) when domain != "" do
