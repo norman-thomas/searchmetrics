@@ -16,7 +16,15 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run: cd assets && npm install phantomjs-prebuilt && cd ..
+
+      - run: curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+      - run: apt-get install -y nodejs
+
+
+      - save_cache:
+          key: node
+          paths:
+            - node_modules
 
       # install Hex locally (without prompt)
       - run: mix local.hex --force
