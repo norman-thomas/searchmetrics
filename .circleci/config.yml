@@ -19,6 +19,7 @@ jobs:
 
       - run: curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
       - run: sudo apt-get install -y nodejs
+      - run: cd assets && npm install phantomjs-prebuilt && cd ..
 
 
       - save_cache:
