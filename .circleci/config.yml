@@ -19,6 +19,7 @@ jobs:
 
       # install Hex locally (without prompt)
       - run: mix local.hex --force
+      - run: mix local.rebar --force
       - run: mix deps.get
       - run: mix compile
       - run: mix test
