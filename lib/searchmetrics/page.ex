@@ -33,8 +33,9 @@ defmodule SearchMetrics.Page do
     html =
       session
       |> Wallaby.Browser.visit(path)
+      |> Wallaby.Browser.page_source()
 
-    unless Wallaby.Browser.has_text?(html, "Ihr tägliches Abfragenkontingent ist aufgebraucht") do
+    unless String.contains?(html, "Ihr tägliches Abfragenkontingent ist aufgebraucht") do
       {:ok, %SearchMetrics.Page{html: html, domain: domain}}
     else
       {:error, :request_limit_reached}
@@ -87,16 +88,9 @@ defmodule SearchMetrics.Page do
   end
 
   defp find_html_node(html, selector) do
-    try do
-      html
-      |> Wallaby.Browser.find(Wallaby.Query.css(selector))
-      |> Wallaby.Element.text()
-    rescue
-      Wallaby.QueryError ->
-        IO.puts(:stderr, "Did not find node for #{selector}")
-        IO.inspect(html)
-        nil
-    end
+    html
+    |> Floki.find(selector)
+    |> Floki.text()
   end
 
   defp get_mojo_value(text) do

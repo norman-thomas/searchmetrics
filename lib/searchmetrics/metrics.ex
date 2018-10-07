@@ -8,11 +8,4 @@ defmodule SearchMetrics.Metrics do
             paid: nil,
             link: nil,
             social: nil
-
-  @doc """
-  Creates a new `SearchMetrics.Metrics` struct with default values
-  """
-  def new do
-    %SearchMetrics.Metrics{}
-  end
 end

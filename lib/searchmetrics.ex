@@ -8,9 +8,13 @@ defmodule SearchMetrics do
   @doc """
   Retrieve searchmetrics data about a given URL
 
+  ## Parameters
+
+  - `domain`: Domain for which the searchmetrics should be retrieved
+
   ## Examples
 
-      iex> SearchMetrics.search("google.com")
+      iex> SearchMetrics.search("grin.com")
       %SearchMetrics.Page{
         domain: "grin.com",
         html: "<!DOCTYPE html>",
