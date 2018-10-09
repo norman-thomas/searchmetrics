@@ -7,7 +7,12 @@ defmodule SearchMetrics.Page do
             html: nil,
             metrics: %SearchMetrics.Metrics{}
 
-  @url "/de/research?url=<%=domain%>"
+  @type t :: %SearchMetrics.Page{
+          domain: String.t() | nil,
+          html: String.t() | nil,
+          metrics: SearchMetrics.Metrics.t()
+        }
+
   @css_accessor_desktop "#overview .x-kpi.double-ring .competitive > .visibility-part.desktop div:nth-child(3)"
   @css_accessor_mobile "#overview .x-kpi.double-ring .competitive > .visibility-part.mobile div:nth-child(3)"
   @css_accessor_seo "#overview .x-kpi.mojo .infos .text .seo"
@@ -15,36 +20,11 @@ defmodule SearchMetrics.Page do
   @css_accessor_link "#overview .x-kpi.mojo .infos .text .link"
   @css_accessor_social "#overview .x-kpi.mojo .infos .text .social"
 
-  @doc """
-  Opens the searchmetrics page for a given domain, provided a Wallaby session
-
-  ## Parameters
-
-    - `session`: a Wallaby session
-    - `domain`: TLD you wish to request
-
-  ## Examples
-
-      iex> SearchMetrics.Page.open_page(session, "google.com")
-  """
-  def open_page(session, domain) when domain != "" do
-    path = EEx.eval_string(@url, domain: domain)
-
-    html =
-      session
-      |> Wallaby.Browser.visit(path)
-      |> Wallaby.Browser.page_source()
-
-    unless String.contains?(html, "Ihr tägliches Abfragenkontingent ist aufgebraucht") do
-      {:ok, %SearchMetrics.Page{html: html, domain: domain}}
-    else
-      {:error, :request_limit_reached}
-    end
-  end
 
   @doc """
   Get mobility score for `:desktop` or `:mobile`
   """
+  @spec get_visibility(SearchMetrics.Page.t(), atom()) :: SearchMetrics.Page.t()
   def get_visibility(%SearchMetrics.Page{} = page, :desktop),
     do: page |> get_score(:desktop, @css_accessor_desktop)
 
@@ -65,6 +45,7 @@ defmodule SearchMetrics.Page do
   @doc """
   Get mojo scores for `:seo`, `:paid`, `:link`, `:social`
   """
+  @spec get_mojo(SearchMetrics.Page.t(), atom()) :: SearchMetrics.Page.t()
   def get_mojo(%SearchMetrics.Page{} = page, :seo),
     do: page |> get_mojo(:seo, @css_accessor_seo)
 
@@ -77,6 +58,7 @@ defmodule SearchMetrics.Page do
   def get_mojo(%SearchMetrics.Page{} = page, :social),
     do: page |> get_mojo(:social, @css_accessor_social)
 
+  @spec get_mojo(SearchMetrics.Page.t(), atom(), String.t()) :: SearchMetrics.Page.t()
   defp get_mojo(%SearchMetrics.Page{html: html} = page, name, selector) do
     value =
       html
@@ -93,6 +75,7 @@ defmodule SearchMetrics.Page do
     |> Floki.text()
   end
 
+  @spec get_mojo_value(String.t()) :: integer | nil
   defp get_mojo_value(text) do
     # match regex, e.g.: "SEO Rank (#1.910)"
     regex = ~r/^[^\(]*\(([^\(\)]+)\)[^\)]*$/
