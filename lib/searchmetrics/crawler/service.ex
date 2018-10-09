@@ -11,25 +11,30 @@ defmodule SearchMetrics.CrawlerService do
 
   ### Client Interface ###
 
+  @doc """
+  Start searchmetrics crawler server
+  """
   @spec start_link(any()) :: GenEvent.on_start()
   def start_link(_args) do
     GenServer.start_link(__MODULE__, :ok, name: @name)
   end
 
+  @doc """
+  Send a request to the server to crawl searchmetrics for a given domain
+  """
   @spec crawl(String.t()) :: String.t() | nil
   def crawl(domain) do
     # 15 sec timeout
     GenServer.call(@name, {:crawl, domain}, 15_000)
   end
 
+  @doc """
+  Parse an HTML page crawled from searchmetrics
+  """
   @spec parse(String.t(), String.t()) :: SearchMetrics.Metrics.t()
   def parse(domain, html) do
-    %SearchMetrics.Metrics{
-      domain: domain
-    }
-    
-
-    # |> nil
+    # 15 sec timeout
+    GenServer.call(@name, {:parse, domain, html}, 15_000)
   end
 
   ### Callbacks ###
@@ -46,6 +51,18 @@ defmodule SearchMetrics.CrawlerService do
 
     spawn(fn ->
       result = SearchMetrics.Crawler.fetch(domain)
+      GenServer.call(parent, {:respond, from, result})
+    end)
+
+    {:noreply, state}
+  end
+
+  @impl true
+  def handle_call({:parse, domain, html}, from, state) do
+    parent = self()
+
+    spawn(fn ->
+      result = SearchMetrics.Parser.get_metrics(domain, html)
       GenServer.call(parent, {:respond, from, result})
     end)
 

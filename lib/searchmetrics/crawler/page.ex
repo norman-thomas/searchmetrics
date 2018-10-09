@@ -1,10 +1,4 @@
 defmodule SearchMetrics.Page do
-  @moduledoc """
-  Module for retrieving information from the searchmetrics.com page
-  """
-
-  require Logger
-
   defstruct html: nil,
             metrics: %SearchMetrics.Metrics{}
 
@@ -12,6 +6,12 @@ defmodule SearchMetrics.Page do
           html: String.t() | nil,
           metrics: SearchMetrics.Metrics.t()
         }
+end
+
+defmodule SearchMetrics.Parser do
+  @moduledoc """
+  Module for scraping information from the searchmetrics.com page
+  """
 
   @css_accessor_desktop "#overview .x-kpi.double-ring .competitive > .visibility-part.desktop div:nth-child(3)"
   @css_accessor_mobile "#overview .x-kpi.double-ring .competitive > .visibility-part.mobile div:nth-child(3)"
@@ -20,7 +20,10 @@ defmodule SearchMetrics.Page do
   @css_accessor_link "#overview .x-kpi.mojo .infos .text .link"
   @css_accessor_social "#overview .x-kpi.mojo .infos .text .social"
 
-  def get_metrics(html, domain) do
+  @doc """
+  Scrape a given searchmetrics HTML page for KPIs like SEO visibility, etc.
+  """
+  def get_metrics(domain, html) do
     values =
       {html, [domain: domain]}
       |> get_visibility([:desktop, :mobile])
