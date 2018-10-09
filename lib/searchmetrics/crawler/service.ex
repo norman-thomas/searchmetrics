@@ -7,7 +7,7 @@ defmodule SearchMetrics.CrawlerService do
   use GenServer
   require Logger
 
-  @name __MODULE__
+  @name SearchMetrics.Interface.CrawlerService
 
   ### Client Interface ###
 
@@ -41,7 +41,7 @@ defmodule SearchMetrics.CrawlerService do
 
   @impl true
   def init(:ok) do
-    Logger.debug("starting SearchMetrics.Crawler process...")
+    Logger.debug("starting #{__MODULE__} process...")
     {:ok, []}
   end
 
