@@ -30,15 +30,6 @@ defmodule SearchMetrics.Crawler do
         {:ok, html} ->
           html
 
-        # result =
-        #  page
-        #  |> get_visibility(:desktop)
-        #  |> get_visibility(:mobile)
-        #  |> get_mojo(:seo)
-        #  |> get_mojo(:paid)
-        #  |> get_mojo(:link)
-        #  |> get_mojo(:social)
-
         {:error, reason} ->
           Logger.error("ERROR while opening page: #{reason}, taking screenshot...")
           Wallaby.Browser.take_screenshot(session)
