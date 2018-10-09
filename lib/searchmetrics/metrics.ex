@@ -3,7 +3,8 @@ defmodule SearchMetrics.Metrics do
   Struct that contains the searchmetrics scores
   """
 
-  defstruct desktop: nil,
+  defstruct domain: "",
+            desktop: nil,
             mobile: nil,
             seo: nil,
             paid: nil,
@@ -11,6 +12,7 @@ defmodule SearchMetrics.Metrics do
             social: nil
 
   @type t :: %SearchMetrics.Metrics{
+          domain: String.t(),
           desktop: integer | nil,
           mobile: integer | nil,
           seo: integer | nil,

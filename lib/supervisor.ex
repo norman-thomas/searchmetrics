@@ -1,8 +1,10 @@
 defmodule SearchMetrics.Supervisor do
   use Supervisor
 
-  def start_link(opts \\ []) do
-    Supervisor.start_link(__MODULE__, :ok, opts)
+  @name __MODULE__
+
+  def start_link(_args \\ []) do
+    Supervisor.start_link(__MODULE__, :ok, name: @name)
   end
 
   def init(:ok) do

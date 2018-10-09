@@ -1,11 +1,11 @@
 defmodule SearchMetricsTest do
   use ExUnit.Case
 
-  #doctest SearchMetrics
+  # doctest SearchMetrics
 
   test "opens page (for google.com)" do
-    #{:ok, page} = SearchMetrics.Page.open_page(session, "google.com")
-    #assert %SearchMetrics.Page{} = page
+    # {:ok, page} = SearchMetrics.Page.open_page(session, "google.com")
+    # assert %SearchMetrics.Page{} = page
   end
 
   test "get visibility" do
