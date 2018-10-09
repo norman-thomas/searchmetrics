@@ -7,7 +7,10 @@
 erl_crash.dump
 *.ez
 *.beam
+/.elixir_ls
 /config/*.secret.exs
+/.vscode
+
 
 assets/node_modules
 ./screens
