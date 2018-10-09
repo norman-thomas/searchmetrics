@@ -31,7 +31,7 @@ defmodule SearchMetrics.Database do
     end
   end
 
-  defp insert(%SearchMetrics.Metrics{} = metrics, db) do
+  defp insert(%SearchMetrics.Metrics{} = metrics) do
     today_str = Date.to_iso8601(Date.utc_today())
 
     :ok =
