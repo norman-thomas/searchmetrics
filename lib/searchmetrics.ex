@@ -7,10 +7,6 @@ defmodule SearchMetrics do
 
 
   def start(_type, _args) do
-    children = [
-    ]
- 
-    opts = [strategy: :one_for_one, name: SearchMetrics.Supervisor]
-    Supervisor.start_link(children, opts)
+    SearchMetrics.Supervisor.start_link()
   end
 end
