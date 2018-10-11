@@ -2,6 +2,7 @@ defmodule SearchMetrics.Cron do
   use GenServer
   require Logger
   alias SearchMetrics.Interface.CrawlerService
+  alias SearchMetrics.Interface.Spreadsheet
 
   @name __MODULE__
 
@@ -40,8 +41,9 @@ defmodule SearchMetrics.Cron do
     Logger.debug("Running cron...")
 
     get_domains()
-    |> Enum.map(&fetch_and_parse/1)
-    |> SearchMetrics.Interface.Spreadsheet.append_rows()
+    |> Enum.map(&CrawlerService.execute/1)
+    |> Enum.reject(&is_nil/1)
+    |> Spreadsheet.append_rows()
 
     Logger.debug("Cron done.")
   end
@@ -51,11 +53,5 @@ defmodule SearchMetrics.Cron do
     File.read!(@domains_file)
     |> String.split("\n")
     |> Enum.reject(&(String.length(&1) < 4))
-  end
-
-  defp fetch_and_parse(domain) do
-    domain
-    |> CrawlerService.fetch()
-    |> CrawlerService.parse(domain)
   end
 end

@@ -21,19 +21,19 @@ defmodule SearchMetrics.Crawler do
       "<!DOCTYPE html>..." <> "..."
 
   """
-  @spec fetch(String.t()) :: String.t() | nil
+  @spec fetch(String.t()) :: {:ok, String.t()} | {:error, atom()}
   def fetch(domain) when is_binary(domain) and domain != "" do
     {:ok, session} = Wallaby.start_session()
 
     result =
       case session |> open_page(domain) do
         {:ok, html} ->
-          html
+          {:ok, html}
 
         {:error, reason} ->
           Logger.error("ERROR while opening page: #{reason}, taking screenshot...")
           Wallaby.Browser.take_screenshot(session)
-          nil
+          {:error, reason}
       end
 
     :ok = Wallaby.end_session(session)
