@@ -28,7 +28,7 @@ defmodule SearchMetrics.CrawlerService do
   end
 
   @impl true
-  def handle_call({:crawl, domain}, from, state) do
+  def handle_call({:fetch, domain}, from, state) do
     parent = self()
 
     spawn(fn ->

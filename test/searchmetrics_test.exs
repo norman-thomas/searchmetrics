@@ -11,38 +11,56 @@ defmodule SearchMetricsTest do
   test "get visibility" do
     html = File.read!("test/searchmetrics.html")
 
-    result =
-      %SearchMetrics.Page{html: html, domain: "grin.com"}
-      |> SearchMetrics.Page.get_visibility(:desktop)
-      |> SearchMetrics.Page.get_visibility(:mobile)
+    {_, result} =
+      SearchMetrics.Parser.get_visibility({html, [domain: "grin.com"]}, [:desktop, :mobile])
 
-    assert %SearchMetrics.Metrics{
+    metrics = struct(SearchMetrics.Metrics, result)
+
+    assert metrics == %SearchMetrics.Metrics{
+             date: Date.utc_today(),
+             domain: "grin.com",
              desktop: 13953,
              mobile: 16785,
-             seo: nil,
-             link: nil,
-             paid: nil,
-             social: nil
-           } == result.metrics
+             seo: 0,
+             link: 0,
+             paid: 0,
+             social: 0
+           }
   end
 
   test "get mojo" do
     html = File.read!("test/searchmetrics.html")
 
-    result =
-      %SearchMetrics.Page{html: html, domain: "grin.com"}
-      |> SearchMetrics.Page.get_mojo(:seo)
-      |> SearchMetrics.Page.get_mojo(:paid)
-      |> SearchMetrics.Page.get_mojo(:link)
-      |> SearchMetrics.Page.get_mojo(:social)
+    {_, result} = SearchMetrics.Parser.get_mojo({html, [domain: "grin.com"]}, [:seo, :link])
 
-    assert %SearchMetrics.Metrics{
-             desktop: nil,
-             mobile: nil,
+    metrics = struct(SearchMetrics.Metrics, result)
+
+    assert metrics == %SearchMetrics.Metrics{
+             date: Date.utc_today(),
+             domain: "grin.com",
+             desktop: 0,
+             mobile: 0,
              seo: 1910,
              link: 2006,
              paid: 0,
              social: 0
-           } == result.metrics
+           }
+  end
+
+  test "get metrics" do
+    html = File.read!("test/searchmetrics.html")
+
+    metrics = SearchMetrics.Parser.get_metrics("grin.com", html)
+
+    assert metrics == %SearchMetrics.Metrics{
+             date: Date.utc_today(),
+             domain: "grin.com",
+             desktop: 13953,
+             mobile: 16785,
+             seo: 1910,
+             link: 2006,
+             paid: 0,
+             social: 0
+           }
   end
 end
