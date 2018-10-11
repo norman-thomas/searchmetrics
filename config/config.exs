@@ -34,3 +34,11 @@ config :wallaby,
   phantomjs: "./assets/node_modules/.bin/phantomjs",
   phantomjs_args: "--webdriver-logfile=phantomjs.log",
   base_url: "https://suite.searchmetrics.com"
+
+config :goth, json: "./config/service_account.json" |> File.read!
+
+config :elixir_google_spreadsheets, :client,
+  request_workers: 2,
+  max_demand: 10,
+  max_interval: :timer.minutes(1),
+  interval: 100

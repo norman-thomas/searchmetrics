@@ -1,5 +1,4 @@
 defmodule SearchMetrics.Interface.CrawlerService do
-
   @name __MODULE__
 
   @doc """

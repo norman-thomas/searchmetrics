@@ -22,7 +22,7 @@ defmodule SearchMetrics.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger, :elixir_google_spreadsheets],
       mod: {SearchMetrics, []}
     ]
   end
@@ -36,7 +36,8 @@ defmodule SearchMetrics.MixProject do
       {:wallaby, "~> 0.20.0", [runtime: true]},
       {:floki, "~> 0.20.4"},
       {:excoveralls, "~> 0.10", only: :test},
-      {:dialyxir, "~> 1.0.0-rc.3", only: [:dev], runtime: false}
+      {:dialyxir, "~> 1.0.0-rc.3", only: [:dev], runtime: false},
+      {:elixir_google_spreadsheets, "~> 0.1.9"}
     ]
   end
 end

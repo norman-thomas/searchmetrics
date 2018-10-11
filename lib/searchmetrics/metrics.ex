@@ -2,8 +2,8 @@ defmodule SearchMetrics.Metrics do
   @typedoc """
   Struct that contains the searchmetrics scores
   """
-
   defstruct domain: "",
+            date: Date.utc_today(),
             desktop: 0,
             mobile: 0,
             seo: 0,
@@ -13,6 +13,7 @@ defmodule SearchMetrics.Metrics do
 
   @type t :: %SearchMetrics.Metrics{
           domain: String.t(),
+          date: Date.t(),
           desktop: integer,
           mobile: integer,
           seo: integer,

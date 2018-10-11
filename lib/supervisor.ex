@@ -9,7 +9,9 @@ defmodule SearchMetrics.Supervisor do
 
   def init(:ok) do
     children = [
-      SearchMetrics.CrawlerService
+      SearchMetrics.CrawlerService,
+      SearchMetrics.Spreadsheet,
+      SearchMetrics.Cron
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

@@ -6,7 +6,7 @@ defmodule SearchMetrics.Crawler do
 
   require Logger
 
-  @url "/de/research?url=<%=domain%>"
+  @url "/de/research?url=" ## <%=domain%>"
 
   @doc """
   Load searchmetrics page for a given domain
@@ -36,13 +36,13 @@ defmodule SearchMetrics.Crawler do
           nil
       end
 
-    Wallaby.end_session(session)
+    :ok = Wallaby.end_session(session)
     result
   end
 
-  @spec open_page(Wallaby.Session.t(), String.t()) :: {:ok, String.t()} | {:error, atom()}
+  #@spec open_page(Wallaby.Session.t(), String.t()) :: {:ok, String.t()} | {:error, atom()}
   defp open_page(session, domain) when is_binary(domain) and domain != "" do
-    path = EEx.eval_string(@url, domain: domain)
+    path = @url <> domain # EEx.eval_string(@url, domain: domain)
 
     html =
       session
