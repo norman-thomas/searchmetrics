@@ -2,6 +2,9 @@
 
 Searchmetrics.com crawler in Elixir
 
+Integrated cron crawls once per day and write results into a Google Spreadsheet.
+
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
@@ -15,24 +18,19 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/searchmetrics](https://hexdocs.pm/searchmetrics).
 
 ## Usage
 
 ```elixir
-iex> SearchMetrics.search("google.com")
-%SearchMetrics.Page{
-  domain: "grin.com",
-  html: "<!DOCTYPE html>" <> ...,
-  metrics: %SearchMetrics.Metrics{
-    desktop: 13953,
-    link: 2006,
-    mobile: 16785,
-    paid: 0,
-    seo: 1910,
-    social: 0
-  }
+iex> SearchMetrics.Interface.CrawlerService.execute("google.com")
+%SearchMetrics.Metrics{
+  date: ~D[2018-10-15],
+  domain: "google.com",
+  desktop: 13953,
+  link: 2006,
+  mobile: 16785,
+  paid: 0,
+  seo: 1910,
+  social: 0
 }
 ```
