@@ -15,7 +15,14 @@ defmodule SearchMetrics.MixProject do
         "coveralls.post": :test,
         "coveralls.html": :test
       ],
-      dialyzer: [plt_add_apps: [:eex, :wallaby]]
+      dialyzer: [plt_add_apps: [:eex, :wallaby]],
+      aliases: aliases()
+    ]
+  end
+
+  defp aliases do
+    [
+      test: "test --no-start" #(2)
     ]
   end
 
