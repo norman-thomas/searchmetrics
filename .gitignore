@@ -15,6 +15,6 @@ erl_crash.dump
 assets/node_modules
 ./screens
 phantomjs.log
-service_account.json
+/config/service_account.json
 
 
