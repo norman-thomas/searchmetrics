@@ -3,14 +3,6 @@ defmodule SearchMetrics.Interface.CrawlerService do
   @name __MODULE__
 
   @doc """
-  Start searchmetrics crawler server
-  """
-  @spec start_link(any()) :: GenEvent.on_start()
-  def start_link(_args) do
-    GenServer.start_link(@name, :ok, name: @name)
-  end
-
-  @doc """
   Send a request to the server to crawl searchmetrics for a given domain
   """
   @spec crawl(String.t()) :: String.t() | nil

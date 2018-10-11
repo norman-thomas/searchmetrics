@@ -20,8 +20,9 @@ defmodule SearchMetrics.Database do
   def init_mnesia() do
     :mnesia.start()
 
-    result = :mnesia.create_table(@tablename, attributes: @columns)
+    result = :mnesia.create_table(@tablename, attributes: @columns, type: :ordered_set)
 
+    :mnesia.add_table_index(@tablename, :date)
     :mnesia.add_table_index(@tablename, :domain)
 
     case result do
@@ -33,19 +34,24 @@ defmodule SearchMetrics.Database do
 
   defp insert(%SearchMetrics.Metrics{} = metrics) do
     today_str = Date.to_iso8601(Date.utc_today())
-
-    :ok =
-      :mnesia.dirty_write(
-        {@tablename, today_str, metrics.domain, metrics.desktop, metrics.mobile, metrics.seo,
-         metrics.paid, metrics.link, metrics.social}
-      )
+    
+    {:atomic, :ok} =
+      :mnesia.transaction(fn ->
+        # key = today_str ++ "__" ++ metrics.domain
+        :mnesia.write(
+          {@tablename, today_str, metrics.domain, metrics.desktop, metrics.mobile, metrics.seo,
+           metrics.paid, metrics.link, metrics.social}
+        )
+      end)
   end
 
+  @impl true
   def handle_call({:insert, %SearchMetrics.Metrics{} = metrics}, _from, state) do
-    :ok = insert(metrics)
+    {:atomic, :ok} = insert(metrics)
     {:reply, :ok, state}
   end
 
+  @impl true
   def handle_call({:read, domain}, _from, state) do
     result = :not_yet_implemented
     {:replace, result, state}

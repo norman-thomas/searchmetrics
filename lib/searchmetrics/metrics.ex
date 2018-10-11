@@ -4,20 +4,20 @@ defmodule SearchMetrics.Metrics do
   """
 
   defstruct domain: "",
-            desktop: nil,
-            mobile: nil,
-            seo: nil,
-            paid: nil,
-            link: nil,
-            social: nil
+            desktop: 0,
+            mobile: 0,
+            seo: 0,
+            paid: 0,
+            link: 0,
+            social: 0
 
   @type t :: %SearchMetrics.Metrics{
           domain: String.t(),
-          desktop: integer | nil,
-          mobile: integer | nil,
-          seo: integer | nil,
-          paid: integer | nil,
-          link: integer | nil,
-          social: integer | nil
+          desktop: integer,
+          mobile: integer,
+          seo: integer,
+          paid: integer,
+          link: integer,
+          social: integer
         }
 end
