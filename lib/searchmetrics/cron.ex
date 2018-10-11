@@ -23,7 +23,7 @@ defmodule SearchMetrics.Cron do
 
   def handle_info(:cron, state) do
     schedule(@day)
-    Logger.info("Running cron...")
+    Logger.info("Re-scheduled cron.")
 
     spawn(fn ->
       work()
@@ -32,21 +32,24 @@ defmodule SearchMetrics.Cron do
     {:noreply, state}
   end
 
-  defp schedule(ms \\ @day) do
+  defp schedule(ms) do
     Process.send_after(self(), :cron, ms)
   end
 
   defp work() do
-    metrics =
-      get_domains()
-      |> String.split("\n")
-      |> Enum.map(&fetch_and_parse/1)
+    Logger.debug("Running cron...")
 
-    metrics
+    get_domains()
+    |> Enum.map(&fetch_and_parse/1)
+    |> SearchMetrics.Interface.Spreadsheet.append_rows()
+
+    Logger.debug("Cron done.")
   end
 
+  @spec get_domains() :: list(String.t())
   defp get_domains() do
     File.read!(@domains_file)
+    |> String.split("\n")
     |> Enum.reject(&(String.length(&1) < 4))
   end
 

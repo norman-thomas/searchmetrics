@@ -3,7 +3,7 @@ defmodule SearchMetrics.Spreadsheet do
 
   @name SearchMetrics.Interface.Spreadsheet
 
-  @id "1AZ2w5p0j4usCThuBSpckKnpGRaoCfH6wlthMVUPrzNI"
+  @sheet_id "1AZ2w5p0j4usCThuBSpckKnpGRaoCfH6wlthMVUPrzNI"
   @columns [:date, :domain, :desktop, :mobile, :seo, :paid, :link, :social]
 
   def start_link(_args) do
@@ -12,7 +12,7 @@ defmodule SearchMetrics.Spreadsheet do
 
   @impl true
   def init(:ok) do
-    {:ok, pid} = GSS.Spreadsheet.Supervisor.spreadsheet(@id)
+    {:ok, pid} = GSS.Spreadsheet.Supervisor.spreadsheet(@sheet_id)
     state = %{pid: pid}
     {:ok, state}
   end
@@ -22,13 +22,20 @@ defmodule SearchMetrics.Spreadsheet do
       @columns
       |> Enum.map(&Map.fetch!(row, &1))
 
-    IO.inspect values, label: "about to send... "
     :ok = GSS.Spreadsheet.append_row(pid, 1, values)
   end
 
   @impl true
   def handle_cast({:append, %SearchMetrics.Metrics{} = row}, state) do
     append(state.pid, row)
+    {:noreply, state}
+  end
+
+  @impl true
+  def handle_cast({:append, [%SearchMetrics.Metrics{} | _] = rows}, state) do
+    rows
+    |> Enum.map(&append(state.pid, &1))
+
     {:noreply, state}
   end
 end

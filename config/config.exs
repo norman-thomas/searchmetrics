@@ -35,7 +35,7 @@ config :wallaby,
   phantomjs_args: "--webdriver-logfile=phantomjs.log",
   base_url: "https://suite.searchmetrics.com"
 
-config :goth, json: "./config/service_account.json" |> File.read!
+config :goth, json: "./config/service_account.json" |> File.read!()
 
 config :elixir_google_spreadsheets, :client,
   request_workers: 2,

@@ -2,6 +2,16 @@ defmodule SearchMetrics.Interface.CrawlerService do
   @name __MODULE__
 
   @doc """
+  Fetches and parses the searchmetrics page for a given domain
+  """
+  @spec execute(String.t()) :: SearchMetrics.Metrics.t()
+  def execute(domain) do
+    domain
+    |> fetch()
+    |> parse(domain)
+  end
+
+  @doc """
   Send a request to the server to fetch the searchmetrics page for a given domain
   """
   @spec fetch(String.t()) :: String.t() | nil
