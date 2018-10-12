@@ -1,0 +1,29 @@
+{
+  "total_rows": 1,
+  "current_page": 1,
+  "total_pages": 1,
+  "total_rows_limited": 1,
+  "total_pages_limited": 1,
+  "total_unmerged_rows": 0,
+  "rows": [
+    ["Facebook gesamt", 491055, 99.99, "fb", "#3C5A99"],
+    ["Pinterest", 48, 0.01, "pi", "#c00f22"],
+    ["LinkedIn", 1, 0, "li", "#029db0"],
+    [
+      "<a class=\"noaccess\" data-layer=\"packages\">Upgrade f\u00fcr mehr Daten</a>",
+      0,
+      0,
+      "gp",
+      "<a class=\"noaccess\" data-layer=\"packages\">Upgrade f\u00fcr mehr Daten</a>"
+    ]
+  ],
+  "currency": { "conversion": 1.1845, "symbol": "$", "prepend": false },
+  "messages": {
+    "error": "F\u00fcr diese Anfrage sind keine Daten verf\u00fcgbar",
+    "usr_limit": 3
+  },
+  "cpr": 10,
+  "export_values": { "type": "row", "values": [] },
+  "grid_date": { "weekly": "07.10.2018", "monthly": "June 2018" },
+  "export": "ex286d27e3e0979e3f6c413f1d98871121"
+}

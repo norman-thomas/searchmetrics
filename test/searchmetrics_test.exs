@@ -1,66 +1,62 @@
 defmodule SearchMetricsTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   # doctest SearchMetrics
 
-  test "opens page (for google.com)" do
-    # {:ok, page} = SearchMetrics.Page.open_page(session, "google.com")
-    # assert %SearchMetrics.Page{} = page
+  setup do
+    bypass = Bypass.open()
+    {:ok, bypass: bypass}
   end
 
-  test "get visibility" do
-    html = File.read!("test/searchmetrics.html")
+  defp endpoint_url(port), do: "http://localhost:#{port}"
 
-    {_, result} =
-      SearchMetrics.Parser.get_visibility({html, [domain: "grin.com"]}, [:desktop, :mobile])
+  def fake_response(url) do
+    filename =
+      case url do
+        "/kpi_research_seosem_trend/organic-visibility-spread" ->
+          "organic-visibility-spread.html"
 
-    metrics = struct(SearchMetrics.Metrics, result)
+        "/custom-module_research_seosem/geo-visibility" ->
+          "geo-visibility.html"
 
-    assert metrics == %SearchMetrics.Metrics{
-             date: Date.utc_today(),
-             domain: "grin.com",
-             desktop: 13953,
-             mobile: 16785,
-             seo: 0,
-             link: 0,
-             paid: 0,
-             social: 0
-           }
+        "/kpi_research_seosem_value/rank-spread" ->
+          "rank-spread.html"
+
+        "/grid/socialspread" ->
+          "social-spread.json"
+
+        "/chart_research_seosem_line/seo-paid-visibility" ->
+          "seo-paid-visibility.json"
+
+        _ ->
+          nil
+      end
+
+    File.read!("samples/" <> filename)
   end
 
-  test "get mojo" do
-    html = File.read!("test/searchmetrics.html")
-
-    {_, result} = SearchMetrics.Parser.get_mojo({html, [domain: "grin.com"]}, [:seo, :link])
-
-    metrics = struct(SearchMetrics.Metrics, result)
-
-    assert metrics == %SearchMetrics.Metrics{
-             date: Date.utc_today(),
-             domain: "grin.com",
-             desktop: 0,
-             mobile: 0,
-             seo: 1910,
-             link: 2006,
-             paid: 0,
-             social: 0
-           }
+  def setup_fake_responses(bypass) do
+    Bypass.expect(
+      bypass,
+      fn conn ->
+        response = fake_response(conn.request_path)
+        Plug.Conn.resp(conn, 200, response)
+      end
+    )
   end
 
-  test "get metrics" do
-    html = File.read!("test/searchmetrics.html")
+  test "fetches all data", %{bypass: bypass} do
+    setup_fake_responses(bypass)
 
-    metrics = SearchMetrics.Parser.get_metrics("grin.com", html)
+    url = endpoint_url(bypass.port)
+    result = SearchMetrics.Crawler.fetch("grin.com", url)
 
-    assert metrics == %SearchMetrics.Metrics{
-             date: Date.utc_today(),
-             domain: "grin.com",
-             desktop: 13953,
-             mobile: 16785,
-             seo: 1910,
-             link: 2006,
-             paid: 0,
-             social: 0
-           }
+    assert length(result) == length([:visibility, :geo, :rank, :social, :visibility_history])
+
+    result
+    |> Keyword.values()
+    |> Enum.each(fn item ->
+      assert String.length(item) > 100
+    end)
   end
 end

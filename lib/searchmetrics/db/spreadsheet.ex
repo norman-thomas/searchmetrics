@@ -1,5 +1,6 @@
 defmodule SearchMetrics.Spreadsheet do
   use GenServer
+  require Logger
 
   @name SearchMetrics.Interface.Spreadsheet
 
@@ -15,6 +16,7 @@ defmodule SearchMetrics.Spreadsheet do
 
   @impl true
   def init(:ok) do
+    Logger.info("Starting #{__MODULE__} process...")
     {:ok, pid} = GSS.Spreadsheet.Supervisor.spreadsheet(@spreadsheet_id)
     state = %{pid: pid}
     {:ok, state}

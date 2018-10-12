@@ -8,11 +8,12 @@ defmodule SearchMetrics.Crawler do
 
   @host "https://suite.searchmetrics.com"
 
+  @country "DE"
   @metrics [:visibility, :geo, :rank, :social, :visibility_history]
 
   @spec fetch(String.t(), String.t()) :: keyword()
-  def fetch(domain, country \\ "DE") do
-    for metric <- @metrics, do: {metric, url(domain, country, metric) |> request}
+  def fetch(domain, host \\ @host) do
+    for metric <- @metrics, do: {metric, url(host, domain, @country, metric) |> request}
   end
 
   defp request({url, params}) do
@@ -31,8 +32,8 @@ defmodule SearchMetrics.Crawler do
     # |> Enum.join("&")
   end
 
-  defp url(domain, country, :visibility) do
-    url = "#{@host}/kpi_research_seosem_trend/organic-visibility-spread"
+  defp url(host, domain, country, :visibility) do
+    url = "#{host}/kpi_research_seosem_trend/organic-visibility-spread"
 
     params =
       [
@@ -48,8 +49,8 @@ defmodule SearchMetrics.Crawler do
     {url, params}
   end
 
-  defp url(domain, country, :geo) do
-    url = "#{@host}/custom-module_research_seosem/geo-visibility"
+  defp url(host, domain, country, :geo) do
+    url = "#{host}/custom-module_research_seosem/geo-visibility"
 
     params =
       [
@@ -65,8 +66,8 @@ defmodule SearchMetrics.Crawler do
     {url, params}
   end
 
-  defp url(domain, country, :rank) do
-    url = "#{@host}/kpi_research_seosem_value/rank-spread"
+  defp url(host, domain, country, :rank) do
+    url = "#{host}/kpi_research_seosem_value/rank-spread"
 
     params =
       [
@@ -82,8 +83,8 @@ defmodule SearchMetrics.Crawler do
     {url, params}
   end
 
-  defp url(domain, country, :social) do
-    url = "#{@host}/grid/socialspread"
+  defp url(host, domain, country, :social) do
+    url = "#{host}/grid/socialspread"
 
     params =
       [
@@ -114,8 +115,8 @@ defmodule SearchMetrics.Crawler do
     {url, params}
   end
 
-  defp url(domain, country, :visibility_history) do
-    url = "#{@host}/chart_research_seosem_line/seo-paid-visibility"
+  defp url(host, domain, country, :visibility_history) do
+    url = "#{host}/chart_research_seosem_line/seo-paid-visibility"
 
     params =
       [

@@ -22,7 +22,7 @@ defmodule SearchMetrics.MixProject do
 
   defp aliases do
     [
-      test: "test --no-start"
+      #test: "test --no-start"
     ]
   end
 
@@ -41,6 +41,7 @@ defmodule SearchMetrics.MixProject do
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0.0-rc.3", only: [:dev], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
+      {:bypass, "~> 0.9", only: :test},
       {:distillery, "~> 2.0", runtime: false},
       {:httpoison, "~> 0.13"},
       {:poison, "~> 3.1"},

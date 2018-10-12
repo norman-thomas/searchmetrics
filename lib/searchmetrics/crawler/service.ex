@@ -23,7 +23,7 @@ defmodule SearchMetrics.CrawlerService do
 
   @impl true
   def init(:ok) do
-    Logger.debug("starting #{__MODULE__} process...")
+    Logger.info("Starting #{__MODULE__} process...")
     {:ok, []}
   end
 

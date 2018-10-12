@@ -1,0 +1,193 @@
+<!--
+
+POST https://suite.searchmetrics.com/custom-module_research_seosem/geo-visibility
+
+url: grin.com
+cc: DE
+filter: {}
+type: 
+link: 
+acc: 0
+
+-->
+<div data-title="CUSTOM-MODULE_RESEARCH_SEOSEM.GEO-VISIBILITY.TITLE" id="_unique_id_0991861001539328610" class="geo-visibility">
+    <div class="grid_8 alpha">
+        <div class="grid_6 alpha mb0">
+            <div class="x-kpi ring value" data-title="CUSTOM-MODULE_RESEARCH_SEOSEM.GEO-VISIBILITY_KPI.TITLE">
+                <div>
+                    <h3>
+                        <div class="title-fader">
+                            <div class="title" title="Stärkstes Land">Stärkstes Land</div>
+                            <div class="gdo"></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div data-key="HELP_CUSTOM-MODULE_RESEARCH_SEOSEM.GEO-VISIBILITY_KPI" class="x-help help">
+                        </div>
+                    </h3><span class="report_info"></span>
+                    <div><img class="fl" width="66" height="66" src="/image/pie/load/images-kpi-20181007-6e9a0ea019e6f80e991e2077187170bd.png" />
+                        <div>
+                            <p>Deutschland</p>
+                            <div><img class="icon" src="/images/lang/de.png" /><span>88,79%</span>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="grid_8">
+            <div id="chart_unique_id_0991861001539328610"></div>
+        </div>
+    </div>
+    <div class="grid_4 omega">
+        <div class="x-headline">
+            <div class="right-border">
+                <div class="x-grid-header">
+                    <p class="title dn">Top 10 Geo-Standorte</p>
+                    <ul>
+                        <div data-key="HELP_CUSTOM-MODULE_RESEARCH_SEOSEM.GEO-VISIBILITY" class="x-help help"> </div>
+                        <li title="Weekly" class="xcalendar-week" style="display: list-item;">
+                            <div class="head_ico calendar-week"></div>Weekly
+                        </li>
+                        <div data-key="REPORT_CUSTOM-MODULE_RESEARCH_SEOSEM.GEO-VISIBILITY" class="x-add help"> </div><span
+                            class="x-btn-xs contextmenu" onclick="Contextmenu.show(this);" data-entries="{'help':true,'report':true,'export':null,'csvexport':null,'task':false,'alert':false,'goal':false,'event':null}"
+                            data-task="{'element':null,'controller':'custom-module_research_seosem','action':'geo-visibility','scope':null,'section':null,'project_id':null,'task':'new'}"
+                            data-key="REPORT_CUSTOM-MODULE_RESEARCH_SEOSEM.GEO-VISIBILITY_KPI">&nbsp;</span>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <table cellspacing="0" cellpadding="0" style="width: 100%; table-layout: fixed;" class="x-grid">
+            <thead>
+                <tr>
+                    <th style="width: 170px;">
+                        <div class="table_header"><span>Land</span></div>
+                    </th>
+                    <th style="width: 90px;">
+                        <div class="table_header"><span>SEO Visibility</span></div>
+                    </th>
+                    <th style="width: 50px;">
+                        <div class="table_header"><span>in %</span></div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-country="de">
+                        <div title="Deutschland" class="gdo-cnt" style="width: 140px;"><img class="flg" src="/images/lang/de.png">Deutschland<div
+                                class="gdo"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </td>
+                    <td class="left">
+                        <div style="width:100%;" class="x-trendbar-background percentage-bar per100 blue"><span>8.235</span></div>
+                    </td>
+                    <td class="right">88,79</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pt20 center np-pdf"><span class="x-btn-event cp" data-layer="open-easy-registration-layer">Kostenlos
+                registrieren<br />um mehr Länder zu sehen.</span></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var mapData = Highcharts.geojson(Highcharts.maps['custom/world']),
+            top_country = 'de';
+
+        $.each(mapData, function () {
+            this.id = this.properties['hc-key']; // for Chart.get()
+        });
+
+        // Initiate the chart
+        var mapChart = $('#chart_unique_id_0991861001539328610').highcharts('Map', {
+            credits: {
+                enabled: false
+            },
+            chart: {
+                events: {
+                    load: function (event) {
+                        initCountrySelection(event)
+                    }
+                }
+                , height: 330
+            },
+            legend: {
+                enabled: false
+            },
+            title: {
+                text: ''
+            },
+            colorAxis: {
+                min: 0,
+                maxColor: '#009CAF',
+                minColor: 'rgba(0,156,175,0.2)'
+            },
+            series: [{
+                data: [{ "country": "de", "visibility": "8235", "per": 88.79, "hc-key": "de", "value": "8235", "name_trs": "Deutschland" }],
+                mapData: mapData,
+                joinBy: 'hc-key',
+                name: '',
+                nullColor: '#f5f5f5',
+                borderColor: '#ccc',
+                states: {
+                    hover: {
+                        color: '#009CAF'
+                    },
+                    select: {
+                        color: '#009CAF'
+                    }
+                }
+            }],
+            tooltip: {
+                borderColor: '#009CAF',
+                formatter: function () {
+                    var name = this.point.name_trs || this.point.name;
+                    return name + ': ' + Highcharts.numberFormat(this.point.visibility, 0) + ' (' + Highcharts.numberFormat(this.point.per, 2) + ' %)';
+                }
+            },
+        }).highcharts();
+
+        if (top_country.length) {
+            mapChart.tooltip.refresh(mapChart.get(top_country));
+            mapChart.get(top_country).select();
+        }
+    });
+
+    function initCountrySelection(event) {
+        var chart = event.target;
+        var country = '';
+
+        $('#_unique_id_0991861001539328610 td[data-country]').not('[data-country="world"]')
+            .mouseover(function () {
+                country = $(this).data('country');
+
+                if (!chart.get(country).selected) {
+                    chart.get(country).select();
+                    chart.tooltip.refresh(chart.get(country));
+                }
+            })
+            .mouseleave(function () {
+                country = $(this).data('country');
+                chart.get(country).select();
+                chart.tooltip.hide(0);
+            })
+            .click(function () {
+                country = $(this).data('country').toUpperCase();
+                Suite.Form.Dropdown.show($('.xcountry').get(0), $('#id_dd_subnav_lang'));
+                $('tr[data-selected="' + country + '"]').click();
+                window.setTimeout(function () {
+                    $('.x-subnav-form:first input[type="submit"]:first').get(0).click();
+                }, 200);
+            })
+            .addClass('cp')
+            .children()
+            .css('pointer-events', 'none')
+    }
+</script>

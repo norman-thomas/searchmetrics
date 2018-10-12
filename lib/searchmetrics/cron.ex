@@ -20,12 +20,18 @@ defmodule SearchMetrics.Cron do
   end
 
   def init(:ok) do
+    Logger.info("Starting #{__MODULE__} process...")
     schedule(@minute)
-    {:ok, []}
+    {:ok, %{ms: @day}}
+  end
+
+  def handle_cast({:timeout, ms}, state) do
+    new_state = %{state | ms: ms}
+    {:noreply, state}
   end
 
   def handle_info(:cron, state) do
-    schedule(@day)
+    schedule(state.ms)
     Logger.info("Re-scheduled cron.")
 
     spawn(fn ->
@@ -40,7 +46,7 @@ defmodule SearchMetrics.Cron do
   end
 
   defp work() do
-    Logger.debug("Running cron...")
+    Logger.debug("Executing cron...")
 
     data =
       get_domains()

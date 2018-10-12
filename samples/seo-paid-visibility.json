@@ -1,0 +1,337 @@
+{
+  "data": {
+    "settings": {
+      "colors": [
+        "#62A9BD",
+        "#72B72A",
+        "#FF9900",
+        "#FF0000",
+        "#006EC3",
+        "#1c8432",
+        "#B0002C",
+        "#84389C",
+        "#004B9F",
+        "#909090",
+        "#db167c",
+        "#ffdd21",
+        "#9f9059"
+      ],
+      "legendswitch": true,
+      "type": "line",
+      "separator": { "thousand": ".", "decimal": "," },
+      "language": {
+        "axis-x": "Zeit",
+        "axis-y": "Visibility",
+        "axis-y-1": "CHART_RESEARCH_SEOSEM_LINE.SEO-PAID-VISIBILITY.Y_AXIS_1",
+        "axis-y-2": "CHART_RESEARCH_SEOSEM_LINE.SEO-PAID-VISIBILITY.Y_AXIS_2",
+        "reset_zoom": "Alles anzeigen"
+      },
+      "watermark": "",
+      "watermark_small": "",
+      "watermark_position": "middle",
+      "watermark_display": true,
+      "recolor_from_series": false,
+      "callback": ""
+    },
+    "chart": {
+      "chart": {
+        "borderRadius": 0,
+        "borderColor": "#FFFFFF",
+        "polar": false,
+        "type": "line",
+        "marginRight": 35,
+        "reflow": false,
+        "style": { "margin": "1px" },
+        "zoomType": "x"
+      },
+      "credits": { "enabled": false },
+      "legend": {
+        "borderWidth": 0,
+        "itemStyle": {
+          "color": "#3E3E40",
+          "font": "11px Tahoma,Helvetica,sans-serif"
+        },
+        "itemHoverStyle": { "color": "#3E3E40" },
+        "y": -7
+      },
+      "plotOptions": {
+        "series": {
+          "turboThreshold": 100000,
+          "animation": false,
+          "connectNulls": true,
+          "shadow": false,
+          "marker": {
+            "symbol": "circle",
+            "radius": 2,
+            "fillColor": "#fff",
+            "lineColor": null,
+            "lineWidth": 1.2,
+            "states": { "hover": { "enabled": false } }
+          },
+          "states": { "hover": { "enabled": false } }
+        }
+      },
+      "title": {
+        "text": "",
+        "style": {
+          "color": "#3E3E40",
+          "font": "13px Tahoma,Helvetica,sans-serif"
+        }
+      },
+      "tooltip": {
+        "borderRadius": 0,
+        "borderWidth": 1,
+        "crosshairs": true,
+        "followPointer": true,
+        "formatter": "formatterTooltipVisibility",
+        "useHTML": false,
+        "shadow": false,
+        "shared": true
+      },
+      "xAxis": {
+        "allowDecimals": false,
+        "categories": [
+          "15.07.2018",
+          "22.07.2018",
+          "29.07.2018",
+          "04.08.2018",
+          "05.08.2018",
+          "12.08.2018",
+          "19.08.2018",
+          "26.08.2018",
+          "02.09.2018",
+          "09.09.2018",
+          "16.09.2018",
+          "23.09.2018",
+          "30.09.2018",
+          "07.10.2018"
+        ],
+        "gridLineColor": "#e9e9e9",
+        "gridLineDashStyle": "longdash",
+        "gridLineWidth": 0.5,
+        "lineWidth": 1,
+        "labels": {
+          "style": {
+            "color": "#969696",
+            "font": "11px Tahoma,Helvetica,sans-serif"
+          },
+          "useHTML": false,
+          "y": 18
+        },
+        "lineColor": "#e9e9e9",
+        "showFirstLabel": true,
+        "showLastLabel": true,
+        "tickColor": "#e9e9e9",
+        "tickLength": 6,
+        "tickmarkPlacement": "on",
+        "title": {
+          "enabled": true,
+          "margin": 12,
+          "text": "Zeit",
+          "style": {
+            "font": "11px Tahoma,Helvetica,sans-serif",
+            "color": "#969696"
+          }
+        }
+      },
+      "yAxis": {
+        "gridLineInterpolation": null,
+        "allowDecimals": false,
+        "alternateGridColor": "rgba(249, 249, 249, 0.5)",
+        "endOnTick": true,
+        "gridLineWidth": 0,
+        "labels": {
+          "formatter": "formatterNumberFormat",
+          "style": {
+            "color": "#969696",
+            "font": "11px Tahoma,Helvetica,sans-serif"
+          }
+        },
+        "lineColor": "#e9e9e9",
+        "lineWidth": 1,
+        "showFirstLabel": true,
+        "startOnTick": false,
+        "title": {
+          "enabled": true,
+          "text": "Visibility",
+          "style": {
+            "font": "11px Tahoma,Helvetica,sans-serif",
+            "color": "#969696"
+          }
+        },
+        "tickColor": "#e9e9e9",
+        "tickWidth": 1
+      },
+      "series": [
+        {
+          "name": "grin.com (SEO Visibility)",
+          "showInLegend": true,
+          "color": "#62A9BD",
+          "data": [
+            { "y": 9462, "name": "" },
+            { "y": 9410, "name": "" },
+            { "y": 9551, "name": "" },
+            { "y": null, "name": "" },
+            { "y": 10312, "name": "" },
+            { "y": 13529, "name": "" },
+            { "y": 13124, "name": "" },
+            { "y": 14227, "name": "" },
+            { "y": 15424, "name": "" },
+            { "y": 14973, "name": "" },
+            { "y": 14143, "name": "" },
+            { "y": 14501, "name": "" },
+            { "y": 13953, "name": "" },
+            { "y": 8235, "name": "" }
+          ],
+          "visible": true,
+          "id": "0"
+        },
+        {
+          "name": "grin.com (Paid Visibility)",
+          "showInLegend": true,
+          "color": "#72B72A",
+          "data": [
+            { "y": 0, "name": "" },
+            { "y": 0, "name": "" },
+            { "y": 0, "name": "" },
+            { "y": null, "name": "" },
+            { "y": 4, "name": "" },
+            { "y": 4, "name": "" },
+            { "y": 0, "name": "" },
+            { "y": 0, "name": "" },
+            { "y": 0, "name": "" },
+            { "y": 0, "name": "" },
+            { "y": 0, "name": "" },
+            { "y": 8, "name": "" },
+            { "y": 0, "name": "" },
+            { "y": 0, "name": "" }
+          ],
+          "visible": true,
+          "id": "1"
+        },
+        {
+          "name": "Google Updates",
+          "showInLegend": true,
+          "color": "#5591F5",
+          "data": [
+            {
+              "y": null,
+              "name": "google_update__",
+              "title": " ",
+              "googleUpdateName": null
+            },
+            {
+              "y": null,
+              "name": "google_update__",
+              "title": " ",
+              "googleUpdateName": null
+            },
+            {
+              "y": null,
+              "name": "google_update__",
+              "title": " ",
+              "googleUpdateName": null
+            },
+            {
+              "y": 11343.2,
+              "name": "google_update_20180804_20180804",
+              "title": " ",
+              "googleUpdateName": "E-A-T Update"
+            },
+            {
+              "y": null,
+              "name": "google_update__",
+              "title": " ",
+              "googleUpdateName": null
+            },
+            {
+              "y": null,
+              "name": "google_update__",
+              "title": " ",
+              "googleUpdateName": null
+            },
+            {
+              "y": null,
+              "name": "google_update__",
+              "title": " ",
+              "googleUpdateName": null
+            },
+            {
+              "y": null,
+              "name": "google_update__",
+              "title": " ",
+              "googleUpdateName": null
+            },
+            {
+              "y": null,
+              "name": "google_update__",
+              "title": " ",
+              "googleUpdateName": null
+            },
+            {
+              "y": null,
+              "name": "google_update__",
+              "title": " ",
+              "googleUpdateName": null
+            },
+            {
+              "y": null,
+              "name": "google_update__",
+              "title": " ",
+              "googleUpdateName": null
+            },
+            {
+              "y": null,
+              "name": "google_update__",
+              "title": " ",
+              "googleUpdateName": null
+            },
+            {
+              "y": null,
+              "name": "google_update__",
+              "title": " ",
+              "googleUpdateName": null
+            },
+            {
+              "y": null,
+              "name": "google_update__",
+              "title": " ",
+              "googleUpdateName": null
+            }
+          ],
+          "visible": false,
+          "id": "2",
+          "lineWidth": 0,
+          "point": {
+            "name": "google_update_",
+            "events": { "click": "googleUpdateOnChartLayer" }
+          },
+          "cursor": "pointer",
+          "showInTooltip": false,
+          "type": "flags",
+          "shape": "url(https://static2.searchmetrics.com/suite/images/chart/icon_google.png)",
+          "title": "",
+          "onSeries": "0"
+        }
+      ],
+      "exporting": {
+        "buttons": {
+          "printButton": { "enabled": false },
+          "exportButton": { "enabled": false }
+        },
+        "filename": "_title_-searchmetrics_suite-20181012_0716",
+        "type": "image/png",
+        "url": "/image/chartexport/"
+      },
+      "csv_export": {
+        "export_key_type": "",
+        "export_hash": "ex8265aee93004308e4d060e7101632e9e",
+        "export_columns": ""
+      }
+    }
+  },
+  "wrapper": "<div class=\"x-headline\" data-title=\"CHART_RESEARCH_SEOSEM_LINE.SEO-PAID-VISIBILITY.TITLE\"><div class=\"right-border\"><p class=\"title\" title=\"Visibility\">Visibility</p><div class=\"x-help help\" data-key=\"HELP_CHART_RESEARCH_SEOSEM_LINE.SEO-PAID-VISIBILITY\"></div><span class=\"report_info\"></span><ul><li style=\"display:none;\" class=\"xexport-image \" title=\"Export\"><div class=\"head_ico export-image\"></div>Export</li><li style=\"display:none;\" class=\"xadd x-add \" title=\"Report\"><div class=\"head_ico add x-add\"></div>Report</li><li class=\"xcalendar-week last \" title=\"Weekly\"><div class=\"head_ico calendar-week\"></div>Weekly</li><span class=\"x-btn-xs contextmenu\" onclick=\"Contextmenu.show(this);\" data-entries=\"{'help':true,'report':true,'export':true,'csvexport':null,'task':false,'alert':false,'goal':false,'event':false}\" data-task=\"{'element':null,'controller':null,'action':null,'scope':null,'section':null,'project_id':null,'task':'new'}\" data-key=\"REPORT_\">&nbsp;</span></ul><div class=\"clear\"></div></div></div><div class=\"x-chart x-grid-border\"><script type=\"text/javascript\">\nfunction _changeValue(select, data)\t{\n\tselect = $(select);\n\tselect.closest('.date_presets').find('input[name=\"' + select.attr('reference') + '\"]').val(data.value);\n\tselect.html(data.name);\n}\n</script>\n<div class=\"date_presets\">\n\t<div class=\"x-dropdown-light relative\" id=\"_unique_id_0010127001539328611\" style=\"display:none;\">\n\t\t<div style=\"max-height:300px;overflow-y:auto;overflow-x:hidden\">\n\t\t\t<table callback=\"_changeValue\">\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A0%2C%22name%22%3A%2200%3A00%22%7D\">\n\t\t\t\t\t\t<td>00:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A1%2C%22name%22%3A%2201%3A00%22%7D\">\n\t\t\t\t\t\t<td>01:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A2%2C%22name%22%3A%2202%3A00%22%7D\">\n\t\t\t\t\t\t<td>02:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A3%2C%22name%22%3A%2203%3A00%22%7D\">\n\t\t\t\t\t\t<td>03:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A4%2C%22name%22%3A%2204%3A00%22%7D\">\n\t\t\t\t\t\t<td>04:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A5%2C%22name%22%3A%2205%3A00%22%7D\">\n\t\t\t\t\t\t<td>05:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A6%2C%22name%22%3A%2206%3A00%22%7D\">\n\t\t\t\t\t\t<td>06:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A7%2C%22name%22%3A%2207%3A00%22%7D\">\n\t\t\t\t\t\t<td>07:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A8%2C%22name%22%3A%2208%3A00%22%7D\">\n\t\t\t\t\t\t<td>08:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A9%2C%22name%22%3A%2209%3A00%22%7D\">\n\t\t\t\t\t\t<td>09:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A10%2C%22name%22%3A%2210%3A00%22%7D\">\n\t\t\t\t\t\t<td>10:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A11%2C%22name%22%3A%2211%3A00%22%7D\">\n\t\t\t\t\t\t<td>11:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A12%2C%22name%22%3A%2212%3A00%22%7D\">\n\t\t\t\t\t\t<td>12:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A13%2C%22name%22%3A%2213%3A00%22%7D\">\n\t\t\t\t\t\t<td>13:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A14%2C%22name%22%3A%2214%3A00%22%7D\">\n\t\t\t\t\t\t<td>14:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A15%2C%22name%22%3A%2215%3A00%22%7D\">\n\t\t\t\t\t\t<td>15:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A16%2C%22name%22%3A%2216%3A00%22%7D\">\n\t\t\t\t\t\t<td>16:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A17%2C%22name%22%3A%2217%3A00%22%7D\">\n\t\t\t\t\t\t<td>17:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A18%2C%22name%22%3A%2218%3A00%22%7D\">\n\t\t\t\t\t\t<td>18:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A19%2C%22name%22%3A%2219%3A00%22%7D\">\n\t\t\t\t\t\t<td>19:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A20%2C%22name%22%3A%2220%3A00%22%7D\">\n\t\t\t\t\t\t<td>20:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A21%2C%22name%22%3A%2221%3A00%22%7D\">\n\t\t\t\t\t\t<td>21:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A22%2C%22name%22%3A%2222%3A00%22%7D\">\n\t\t\t\t\t\t<td>22:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t<tr data=\"%7B%22value%22%3A23%2C%22name%22%3A%2223%3A00%22%7D\">\n\t\t\t\t\t\t<td>23:00</td>\n\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t</table>\n\t\t</div>\n\t</div>\n\tZeitspanne:\n\t<span class=\"s-chart-input\">\n\t\t<input class='x-datepicker x-input date_from rep_input' weeks='[\"20181007\",\"20180930\",\"20180923\",\"20180916\",\"20180909\",\"20180902\",\"20180826\",\"20180819\",\"20180812\",\"20180805\",\"20180729\",\"20180722\",\"20180715\"]' name='date_from' type='text' readonly='readonly' value='15.07.2018'/>\n\t\t\t\t -\n\t\t<input class='x-datepicker x-input date_to' weeks='[\"20181007\",\"20180930\",\"20180923\",\"20180916\",\"20180909\",\"20180902\",\"20180826\",\"20180819\",\"20180812\",\"20180805\",\"20180729\",\"20180722\",\"20180715\"]' name=\"date_to\" type=\"text\" readonly=\"readonly\" value=\"07.10.2018\"/>\n\t\t\t\t<input type=\"hidden\" class=\"alt_datepicker alt_date_from\" value=\"20180715\"/>\n\t\t<input type=\"hidden\" class=\"alt_date_to\" value=\"20181007\"/>\n\t</span>\n\t<button class=\"x-btn-s timezoom_button button\">GO</button>\n\t\t\t<span class=\"ml10\">Zoom:</span>\n\t\t<span class=\"s-chart-timezoom\" data-period=\"13\">\n\t\t<button class=\"x-btn-s timezoom button\" data-data=\"07.09.2018\" data-post=\"20180907\" data-num=\"1\">1M</button><button class=\"x-btn-s timezoom button\" data-data=\"07.08.2018\" data-post=\"20180807\" data-num=\"2\">2M</button><button class=\"x-btn-s timezoom button\" data-data=\"\" data-post=\"\" data-num=\"6\"disabled=\"disabled\">6M</button><button class=\"x-btn-s timezoom button\" data-data=\"\" data-post=\"\" data-num=\"12\"disabled=\"disabled\">1J</button><button class=\"x-btn-s timezoom button\" data-data=\"\" data-post=\"\" data-num=\"24\"disabled=\"disabled\">2J</button><button class=\"x-btn-s timezoom button\" data-data=\"\" data-post=\"\" data-num=\"60\"disabled=\"disabled\">5J</button>\t\t\t<span class=\"timezoom-zero\" data-data=\"07.10.2018\" data-post=\"20181007\"></span>\n\t</span>\n\t\n\t\n\t<span class=\"ml10\" style=\"font-size:12px;\">Daten der letzten 6 Monate sehen? <a onclick=\"showRegistrationLayer(); return false;\" class=\"noaccess no-img cp\"><strong>Kostenlos registrieren!</strong></a></span></div><div class=\"chart big\" nodata=\"line\"></div></div>",
+  "export_key_type": "CHART_RESEARCH_SEOSEM_LINE.SEO-PAID-VISIBILITY.TITLE",
+  "export": "ex8265aee93004308e4d060e7101632e9e",
+  "view": { "export": "ex8265aee93004308e4d060e7101632e9e" }
+}
