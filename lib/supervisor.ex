@@ -10,7 +10,7 @@ defmodule SearchMetrics.Supervisor do
   def init(:ok) do
     children = [
       SearchMetrics.CrawlerService,
-      #SearchMetrics.Cron,
+      # SearchMetrics.Cron,
       SearchMetrics.Spreadsheet
     ]
 

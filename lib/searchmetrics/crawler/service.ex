@@ -40,11 +40,11 @@ defmodule SearchMetrics.CrawlerService do
   end
 
   @impl true
-  def handle_call({:parse, domain, html}, from, state) do
+  def handle_call({:parse, data}, from, state) do
     parent = self()
 
     spawn(fn ->
-      result = SearchMetrics.Parser.parse(domain, html)
+      result = SearchMetrics.Parser.parse(data)
       GenServer.call(parent, {:respond, from, result})
     end)
 

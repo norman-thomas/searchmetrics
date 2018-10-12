@@ -42,7 +42,7 @@ defmodule SearchMetrics.Cron do
 
     get_domains()
     |> Enum.map(&CrawlerService.execute/1)
-    |> Enum.reject(&is_nil/1)
+    |> Enum.reject(fn item -> length(item) == 0 end)
     |> Spreadsheet.append_rows()
 
     Logger.debug("Cron done.")

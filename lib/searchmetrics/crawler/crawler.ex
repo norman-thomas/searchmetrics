@@ -10,6 +10,7 @@ defmodule SearchMetrics.Crawler do
 
   @metrics [:visibility, :geo, :rank, :social, :visibility_history]
 
+  @spec fetch(String.t(), String.t()) :: keyword()
   def fetch(domain, country \\ "DE") do
     for metric <- @metrics, do: {metric, url(domain, country, metric) |> request}
   end
@@ -26,8 +27,8 @@ defmodule SearchMetrics.Crawler do
 
   defp build_body(kwl) when is_list(kwl) do
     {:form, kwl}
-    #|> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
-    #|> Enum.join("&")
+    # |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
+    # |> Enum.join("&")
   end
 
   defp url(domain, country, :visibility) do

@@ -20,6 +20,9 @@ defmodule SearchMetrics.Parser do
 
   # @metrics [:visibility, :geo, :rank, :visibility_history]
 
+  @doc """
+  Parse all data from the fetched HTML and JSON
+  """
   def parse([{k, v} | t] = data) do
     [{k, parse(v, k)} | parse(t)]
   end
@@ -28,18 +31,15 @@ defmodule SearchMetrics.Parser do
     []
   end
 
-  @doc """
-  Extracts the metrics from a given searchmetrics HTML page
-  """
   @spec parse(String.t(), atom()) :: keyword()
-  def parse(html, :visibility) do
+  defp parse(html, :visibility) do
     [
       get_visibility(html, :desktop, @css_accessor_desktop),
       get_visibility(html, :mobile, @css_accessor_mobile)
     ]
   end
 
-  def parse(html, :rank) do
+  defp parse(html, :rank) do
     [
       get_rank(html, :seo, @css_accessor_seo),
       get_rank(html, :paid, @css_accessor_paid),
@@ -48,7 +48,7 @@ defmodule SearchMetrics.Parser do
     ]
   end
 
-  def parse(json, :social) do
+  defp parse(json, :social) do
     {:ok, data} = Poison.decode(json)
 
     data
@@ -57,12 +57,12 @@ defmodule SearchMetrics.Parser do
     |> Enum.map(&parse_social/1)
   end
 
-  def parse(html, :geo) do
+  defp parse(html, :geo) do
     Floki.find(html, @css_accessor_geo)
     |> Enum.map(&parse_geo/1)
   end
 
-  def parse(json, :visibility_history) do
+  defp parse(json, :visibility_history) do
     {:ok, data} = Poison.decode(json)
 
     date_path = ["data", "chart", "xAxis", "categories"]
