@@ -15,7 +15,7 @@ defmodule SearchMetrics.MixProject do
         "coveralls.post": :test,
         "coveralls.html": :test
       ],
-      dialyzer: [plt_add_apps: [:eex, :wallaby]],
+      dialyzer: [plt_add_apps: [:eex]],
       aliases: aliases()
     ]
   end
@@ -30,6 +30,7 @@ defmodule SearchMetrics.MixProject do
   def application do
     [
       extra_applications: [:logger, :httpoison, :elixir_google_spreadsheets],
+      applications: [:timex],
       mod: {SearchMetrics, []}
     ]
   end
@@ -44,6 +45,7 @@ defmodule SearchMetrics.MixProject do
       {:httpoison, "~> 0.13"},
       {:poison, "~> 3.1"},
       {:floki, "~> 0.20.4"},
+      {:timex, "~> 3.4"},
       {:elixir_google_spreadsheets, "~> 0.1.9"}
     ]
   end

@@ -8,7 +8,7 @@ defmodule SearchMetrics.Crawler do
 
   @host "https://suite.searchmetrics.com"
 
-  @metrics [:visibility, :geo, :rank, :social, :seo_paid]
+  @metrics [:visibility, :geo, :rank, :social, :visibility_history]
 
   def fetch(domain, country \\ "DE") do
     for metric <- @metrics, do: {metric, url(domain, country, metric) |> request}
@@ -82,7 +82,7 @@ defmodule SearchMetrics.Crawler do
   end
 
   defp url(domain, country, :social) do
-    url = "#{@host}/chart_research_seosem_line/seo-paid-visibility"
+    url = "#{@host}/grid/socialspread"
 
     params =
       [
@@ -113,8 +113,8 @@ defmodule SearchMetrics.Crawler do
     {url, params}
   end
 
-  defp url(domain, country, :seo_paid) do
-    url = "#{@host}/grid/socialspread"
+  defp url(domain, country, :visibility_history) do
+    url = "#{@host}/chart_research_seosem_line/seo-paid-visibility"
 
     params =
       [

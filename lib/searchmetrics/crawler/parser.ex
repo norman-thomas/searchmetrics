@@ -3,6 +3,8 @@ defmodule SearchMetrics.Parser do
   Module for scraping information from the searchmetrics.com page
   """
 
+  use Timex
+
   @css_accessor_desktop ".visibility-part.desktop div:nth-child(3)"
   @css_accessor_mobile ".visibility-part.mobile div:nth-child(3)"
 
@@ -17,6 +19,14 @@ defmodule SearchMetrics.Parser do
   @css_accessor_geo_percentage "td.right"
 
   # @metrics [:visibility, :geo, :rank, :visibility_history]
+
+  def parse([{k, v} | t] = data) do
+    [{k, parse(v, k)} | parse(t)]
+  end
+
+  def parse([]) do
+    []
+  end
 
   @doc """
   Extracts the metrics from a given searchmetrics HTML page
@@ -54,14 +64,13 @@ defmodule SearchMetrics.Parser do
 
   def parse(json, :visibility_history) do
     {:ok, data} = Poison.decode(json)
-    # IO.inspect(data)
 
     date_path = ["data", "chart", "xAxis", "categories"]
     value_path = ["data", "chart", "series", 0, "data"]
 
     dates =
       deep_get(data, date_path)
-      |> Enum.map(&parse_german_date/1)
+      |> Enum.map(&parse_date/1)
 
     values =
       deep_get(data, value_path)
@@ -84,12 +93,16 @@ defmodule SearchMetrics.Parser do
     m
   end
 
-  defp parse_german_date(date_str) do
-    date_str
-    |> String.split(".")
-    |> Enum.reverse()
-    |> Enum.join("-")
-    |> Date.from_iso8601!()
+  defp parse_date(date_str) do
+    {:ok, datetime} =
+      cond do
+        String.contains?(date_str, "/") -> Timex.parse(date_str, "{0M}/{0D}/{YYYY}")
+        String.contains?(date_str, ".") -> Timex.parse(date_str, "{0D}.{0M}.{YYYY}")
+        String.contains?(date_str, "-") -> Timex.parse(date_str, "{YYYY}-{0M}-{0D}")
+        true -> nil
+      end
+
+    NaiveDateTime.to_date(datetime)
   end
 
   defp parse_social([platform, amount, percentage, platform_code | _]) do
