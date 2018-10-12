@@ -3,8 +3,11 @@ defmodule SearchMetrics.Spreadsheet do
 
   @name SearchMetrics.Interface.Spreadsheet
 
-  @sheet_id "1AZ2w5p0j4usCThuBSpckKnpGRaoCfH6wlthMVUPrzNI"
-  @columns [:date, :domain, :desktop, :mobile, :seo, :paid, :link, :social]
+  @spreadsheet_id "1AZ2w5p0j4usCThuBSpckKnpGRaoCfH6wlthMVUPrzNI"
+  @columns %{
+    visibility: [:domain, :date, :desktop, :mobile, :seo, :paid, :link, :social],
+    social: [:domain, :date, :platform, :platform_code, :amount, :percent]
+  }
 
   def start_link(_args) do
     GenServer.start_link(__MODULE__, :ok, name: @name)
@@ -12,30 +15,38 @@ defmodule SearchMetrics.Spreadsheet do
 
   @impl true
   def init(:ok) do
-    {:ok, pid} = GSS.Spreadsheet.Supervisor.spreadsheet(@sheet_id)
+    {:ok, pid} = GSS.Spreadsheet.Supervisor.spreadsheet(@spreadsheet_id)
     state = %{pid: pid}
     {:ok, state}
   end
 
-  defp append(pid, %SearchMetrics.Metrics{} = row) do
-    values =
-      @columns
-      |> Enum.map(&Map.fetch!(row, &1))
-
-    :ok = GSS.Spreadsheet.append_row(pid, 1, values)
-  end
-
   @impl true
-  def handle_cast({:append, %SearchMetrics.Metrics{} = row}, state) do
-    append(state.pid, row)
-    {:noreply, state}
-  end
-
-  @impl true
-  def handle_cast({:append, [%SearchMetrics.Metrics{} | _] = rows}, state) do
+  def handle_cast({:append, type, [[_ | _] | _] = rows}, state) do
     rows
-    |> Enum.map(&append(state.pid, &1))
+    |> Enum.map(&append(state.pid, type, &1))
 
     {:noreply, state}
+  end
+
+  defp append(pid, type, [_ | _] = row) do
+    sheet_id = get_sheet_id(pid, type)
+
+    values =
+      Map.fetch!(@columns, type)
+      |> Enum.map(&Keyword.fetch!(row, &1))
+
+    :ok = GSS.Spreadsheet.append_row(pid, 1, values, sheet_id: sheet_id)
+  end
+
+  defp get_sheet_id(pid, :visibility) do
+    GSS.Spreadsheet.sheets(pid)
+    |> Map.fetch!("Visibility Log")
+    |> Map.fetch!("sheetId")
+  end
+
+  defp get_sheet_id(pid, :social) do
+    GSS.Spreadsheet.sheets(pid)
+    |> Map.fetch!("Social Log")
+    |> Map.fetch!("sheetId")
   end
 end

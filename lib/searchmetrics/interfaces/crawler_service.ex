@@ -14,7 +14,7 @@ defmodule SearchMetrics.Interface.CrawlerService do
     domain
     |> fetch()
     |> parse()
-    |> Kernel.++(domain: domain)
+    |> Kernel.++(domain: domain, date: Date.utc_today())
   end
 
   @spec fetch(String.t()) :: {:ok, keyword()} | {:error, atom()}

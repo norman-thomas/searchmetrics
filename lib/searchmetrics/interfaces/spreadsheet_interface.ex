@@ -1,13 +1,13 @@
 defmodule SearchMetrics.Interface.Spreadsheet do
   @name __MODULE__
 
-  @spec append_row(SearchMetrics.Metrics.t()) :: :ok
-  def append_row(%SearchMetrics.Metrics{} = row) do
-    :ok = GenServer.cast(@name, {:append, row})
+  @spec append_rows(list(keyword()), atom()) :: :ok
+  def append_rows([[_ | _] | _] = rows, type) do
+    :ok = GenServer.cast(@name, {:append, type, rows})
   end
 
-  @spec append_rows(list(SearchMetrics.Metrics.t())) :: :ok
-  def append_rows([%SearchMetrics.Metrics{} | _] = rows) do
-    :ok = GenServer.cast(@name, {:append, rows})
+  @spec append_row(keyword(), atom()) :: :ok
+  def append_row([_ | _] = row, type) do
+    :ok = GenServer.cast(@name, {:append, type, [row]})
   end
 end

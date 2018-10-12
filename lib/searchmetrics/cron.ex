@@ -1,6 +1,8 @@
 defmodule SearchMetrics.Cron do
   use GenServer
   require Logger
+
+  import SearchMetrics.Utils
   alias SearchMetrics.Interface.CrawlerService
   alias SearchMetrics.Interface.Spreadsheet
 
@@ -9,7 +11,7 @@ defmodule SearchMetrics.Cron do
   # time in milliseconds
   @minute 60 * 1000
   @day 24 * 60 * @minute
-  @week 7 * @day
+  # @week 7 * @day
 
   @domains_file "./compare.txt"
 
@@ -40,10 +42,18 @@ defmodule SearchMetrics.Cron do
   defp work() do
     Logger.debug("Running cron...")
 
-    get_domains()
-    |> Enum.map(&CrawlerService.execute/1)
-    |> Enum.reject(fn item -> length(item) == 0 end)
-    |> Spreadsheet.append_rows()
+    data =
+      get_domains()
+      |> Enum.map(&CrawlerService.execute/1)
+      |> Enum.reject(fn item -> length(item) == 0 end)
+
+    data
+    |> Enum.map(&overview_row/1)
+    |> Spreadsheet.append_rows(:visibility)
+
+    data
+    |> Enum.map(&social_rows/1)
+    |> Spreadsheet.append_rows(:social)
 
     Logger.debug("Cron done.")
   end
@@ -53,5 +63,27 @@ defmodule SearchMetrics.Cron do
     File.read!(@domains_file)
     |> String.split("\n")
     |> Enum.reject(&(String.length(&1) < 4))
+  end
+
+  def overview_row(data) do
+    g = &deep_get/2
+
+    [
+      date: g.(data, [:date]),
+      domain: g.(data, [:domain]),
+      desktop: g.(data, [:visibility, :desktop]),
+      mobile: g.(data, [:visibility, :mobile]),
+      seo: g.(data, [:rank, :seo]),
+      paid: g.(data, [:rank, :paid]),
+      link: g.(data, [:rank, :link]),
+      social: g.(data, [:rank, :social])
+    ]
+  end
+
+  def social_rows(data) do
+    to_add = [date: deep_get(data, [:date]), domain: deep_get(data, [:domain])]
+
+    deep_get(data, [:social])
+    |> Enum.map(fn row -> to_add ++ row end)
   end
 end
