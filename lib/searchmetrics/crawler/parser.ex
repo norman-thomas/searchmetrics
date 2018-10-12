@@ -23,7 +23,7 @@ defmodule SearchMetrics.Parser do
   @doc """
   Parse all data from the fetched HTML and JSON
   """
-  def parse([{k, v} | t] = data) do
+  def parse([{k, v} | t]) do
     [{k, parse(v, k)} | parse(t)]
   end
 

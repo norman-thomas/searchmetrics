@@ -27,7 +27,7 @@ defmodule SearchMetrics.Cron do
 
   def handle_cast({:timeout, ms}, state) do
     new_state = %{state | ms: ms}
-    {:noreply, state}
+    {:noreply, new_state}
   end
 
   def handle_info(:cron, state) do

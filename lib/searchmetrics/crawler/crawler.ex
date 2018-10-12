@@ -134,8 +134,4 @@ defmodule SearchMetrics.Crawler do
 
     {url, params}
   end
-
-  defp check_quota(response, :rank) do
-    String.contains?(response, "Ihr tägliches Abfragenkontingent ist aufgebraucht")
-  end
 end

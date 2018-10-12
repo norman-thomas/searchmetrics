@@ -30,14 +30,28 @@ defmodule SearchMetrics.Spreadsheet do
     {:noreply, state}
   end
 
-  defp append(pid, type, [_ | _] = row) do
-    sheet_id = get_sheet_id(pid, type)
+  defp append(pid, :visibility, [_ | _] = row) do
+    sheet_id = get_sheet_id(pid, :visibility)
 
     values =
-      Map.fetch!(@columns, type)
+      @columns.visibility
       |> Enum.map(&Keyword.fetch!(row, &1))
 
     :ok = GSS.Spreadsheet.append_row(pid, 1, values, sheet_id: sheet_id)
+  end
+
+  defp append(pid, :social, [_ | _] = rows) do
+    sheet_id = get_sheet_id(pid, :social)
+
+    values =
+      rows
+      |> Enum.map(fn row ->
+        @columns.social
+        |> Enum.map(&Keyword.fetch!(row, &1))
+      end)
+
+    values
+    |> Enum.each(:ok = &GSS.Spreadsheet.append_row(pid, 1, &1, sheet_id: sheet_id))
   end
 
   defp get_sheet_id(pid, :visibility) do
