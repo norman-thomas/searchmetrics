@@ -22,14 +22,14 @@ defmodule SearchMetrics.MixProject do
 
   defp aliases do
     [
-      test: "test --no-start" #(2)
+      test: "test --no-start"
     ]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :elixir_google_spreadsheets],
+      extra_applications: [:logger, :httpoison, :elixir_google_spreadsheets],
       mod: {SearchMetrics, []}
     ]
   end
@@ -41,7 +41,8 @@ defmodule SearchMetrics.MixProject do
       {:dialyxir, "~> 1.0.0-rc.3", only: [:dev], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
       {:distillery, "~> 2.0", runtime: false},
-      {:wallaby, "~> 0.20.0", [runtime: true]},
+      {:httpoison, "~> 0.13"},
+      {:poison, "~> 3.1"},
       {:floki, "~> 0.20.4"},
       {:elixir_google_spreadsheets, "~> 0.1.9"}
     ]

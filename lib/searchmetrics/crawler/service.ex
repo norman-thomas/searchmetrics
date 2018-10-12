@@ -44,7 +44,7 @@ defmodule SearchMetrics.CrawlerService do
     parent = self()
 
     spawn(fn ->
-      result = SearchMetrics.Parser.get_metrics(domain, html)
+      result = SearchMetrics.Parser.parse(domain, html)
       GenServer.call(parent, {:respond, from, result})
     end)
 

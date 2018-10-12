@@ -26,7 +26,7 @@ defmodule SearchMetrics.Interface.CrawlerService do
   end
 
   defp parse({:error, reason}, domain) do
-    Logger.warn("#{domain}: skipping parsing of failed download (#{to_string reason})")
+    Logger.warn("#{domain}: skipping parsing of failed download (#{to_string(reason)})")
     nil
   end
 end

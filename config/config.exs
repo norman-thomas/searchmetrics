@@ -29,12 +29,6 @@ use Mix.Config
 #
 #     import_config "#{Mix.env()}.exs"
 
-config :wallaby,
-  screenshot_dir: "./screens",
-  phantomjs: "./assets/node_modules/.bin/phantomjs",
-  phantomjs_args: "--webdriver-logfile=phantomjs.log",
-  base_url: "https://suite.searchmetrics.com"
-
 config :goth, json: "./config/service_account.json" |> File.read!()
 
 config :elixir_google_spreadsheets, :client,
