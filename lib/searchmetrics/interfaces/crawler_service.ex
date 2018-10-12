@@ -17,18 +17,13 @@ defmodule SearchMetrics.Interface.CrawlerService do
     |> Kernel.++(domain: domain, date: Date.utc_today())
   end
 
-  @spec fetch(String.t()) :: {:ok, keyword()} | {:error, atom()}
+  @spec fetch(String.t()) :: keyword()
   defp fetch(domain) when is_binary(domain) and byte_size(domain) > 0 do
     GenServer.call(@name, {:fetch, domain}, @timeout)
   end
 
-  @spec parse({:ok, keyword()} | {:error, atom()}) :: keyword()
+  @spec parse(keyword()) :: keyword()
   defp parse(data) when is_list(data) do
     GenServer.call(@name, {:parse, data}, @timeout)
-  end
-
-  defp parse({:error, reason}) do
-    Logger.warn("#{__MODULE__}: skipping parsing of failed download (#{to_string(reason)})")
-    []
   end
 end

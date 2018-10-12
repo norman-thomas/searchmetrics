@@ -59,4 +59,11 @@ defmodule SearchMetricsTest do
       assert String.length(item) > 100
     end)
   end
+
+  test "parses the data correctly", %{bypass: bypass} do
+    setup_fake_responses(bypass)
+
+    url = endpoint_url(bypass.port)
+    result = SearchMetrics.Crawler.fetch("grin.com", url)
+  end
 end

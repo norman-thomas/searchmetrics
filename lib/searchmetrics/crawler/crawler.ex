@@ -13,7 +13,9 @@ defmodule SearchMetrics.Crawler do
 
   @spec fetch(String.t(), String.t()) :: keyword()
   def fetch(domain, host \\ @host) do
-    for metric <- @metrics, do: {metric, url(host, domain, @country, metric) |> request}
+    for metric <- @metrics do
+      {metric, url(host, domain, @country, metric) |> request}
+    end
   end
 
   defp request({url, params}) do
