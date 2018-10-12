@@ -29,6 +29,8 @@ use Mix.Config
 #
 #     import_config "#{Mix.env()}.exs"
 
+config :logger, level: :info
+
 config :bypass, adapter: Plug.Adapters.Cowboy2
 
 config :goth, json: "./config/service_account.json" |> File.read!()
