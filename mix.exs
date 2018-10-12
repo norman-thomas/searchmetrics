@@ -40,7 +40,7 @@ defmodule SearchMetrics.MixProject do
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0.0-rc.3", only: [:dev], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
-      {:distillery, "~> 2.0"},
+      {:distillery, "~> 2.0", runtime: false},
       {:wallaby, "~> 0.20.0", [runtime: true]},
       {:floki, "~> 0.20.4"},
       {:elixir_google_spreadsheets, "~> 0.1.9"}
