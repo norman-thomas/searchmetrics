@@ -17,6 +17,8 @@ defmodule SearchMetrics.Crawler do
   end
 
   defp request({url, params}) do
+    Logger.debug("REQUESTing #{url} with #{inspect(params)}")
+
     %HTTPoison.Response{body: response} =
       HTTPoison.post!(url, params, %{
         "Content-Type" => "application/x-www-form-urlencoded",
