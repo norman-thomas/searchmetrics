@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-      "phantomjs-prebuilt": "^2.1.16"
+      "phantomjs-prebuilt": "^2.1.16",
+      "brunch": "^2.10.17"
     }
   }
