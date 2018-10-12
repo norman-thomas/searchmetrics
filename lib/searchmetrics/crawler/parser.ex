@@ -57,7 +57,7 @@ defmodule SearchMetrics.Parser do
     # IO.inspect(data)
 
     date_path = ["data", "chart", "xAxis", "categories"]
-    value_path = ["data", "chart", "series", 1, "data"]
+    value_path = ["data", "chart", "series", 0, "data"]
 
     dates =
       deep_get(data, date_path)
@@ -71,15 +71,11 @@ defmodule SearchMetrics.Parser do
   end
 
   defp deep_get(%{} = m, [h | t]) do
-    IO.puts("called deep_get with head #{inspect(h)} and tail #{inspect(t)}")
-
     Map.fetch!(m, h)
     |> deep_get(t)
   end
 
   defp deep_get([_ | _] = m, [h | t]) when is_integer(h) do
-    IO.puts("called deep_get with head #{inspect(h)} and tail #{inspect(t)}")
-
     Enum.fetch!(m, h)
     |> deep_get(t)
   end
