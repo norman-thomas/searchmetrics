@@ -5,6 +5,8 @@ defmodule SearchMetrics.Parser do
 
   use Timex
 
+  import SearchMetrics.Utils
+
   @css_accessor_desktop ".visibility-part.desktop div:nth-child(3)"
   @css_accessor_mobile ".visibility-part.mobile div:nth-child(3)"
 
@@ -82,22 +84,6 @@ defmodule SearchMetrics.Parser do
     Enum.zip(dates, values)
   end
 
-  defp deep_get(%{} = m, [h | t]) do
-    m
-    |> Map.fetch!(h)
-    |> deep_get(t)
-  end
-
-  defp deep_get([_ | _] = m, [h | t]) when is_integer(h) do
-    m
-    |> Enum.fetch!(h)
-    |> deep_get(t)
-  end
-
-  defp deep_get(m, []) do
-    m
-  end
-
   defp parse_date(date_str) do
     {:ok, datetime} =
       cond do
@@ -130,8 +116,7 @@ defmodule SearchMetrics.Parser do
   defp get_geo(html, tag, selector, value_func) do
     value =
       html
-      |> find_html_node(selector)
-      |> value_func.()
+      |> get_score(selector, value_func)
 
     {tag, value}
   end
