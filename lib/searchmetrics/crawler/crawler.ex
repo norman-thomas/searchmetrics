@@ -13,6 +13,7 @@ defmodule SearchMetrics.Crawler do
   @spec fetch(String.t(), String.t()) :: keyword()
   def fetch(domain, host \\ @host) do
     for metric <- @metrics do
+      # credo:disable-for-next-line Credo.Check.Refactor.PipeChainStart
       {metric, url(host, domain, @country, metric) |> request}
     end
   end
