@@ -15,7 +15,7 @@ defmodule SearchMetrics.MixProject do
         "coveralls.post": :test,
         "coveralls.html": :test
       ],
-      dialyzer: [plt_add_apps: [:eex]],
+      dialyzer: [plt_add_apps: [:floki]],
       aliases: aliases()
     ]
   end
