@@ -1,4 +1,7 @@
 defmodule SearchMetrics.Supervisor do
+  @moduledoc """
+  SearchMetrics supervisor, which ensures that the services keep running
+  """
   use Supervisor
 
   @name __MODULE__

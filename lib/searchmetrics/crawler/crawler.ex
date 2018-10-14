@@ -1,7 +1,6 @@
 defmodule SearchMetrics.Crawler do
   @moduledoc """
-    Crawler service which has the ability to fetch the searchmetrics page
-    for a given domain
+    Implementation of crawler for fetching the searchmetrics page for a given domain
   """
 
   require Logger
@@ -19,7 +18,7 @@ defmodule SearchMetrics.Crawler do
   end
 
   defp request({url, params}) do
-    Logger.debug("REQUESTing #{url} with #{inspect(params)}")
+    Logger.debug(fn -> "REQUESTing #{url} with #{inspect(params)}" end)
 
     %HTTPoison.Response{body: response} =
       HTTPoison.post!(url, params, %{

@@ -1,6 +1,6 @@
 defmodule SearchMetrics do
   @moduledoc """
-  Documentation for SearchMetrics.
+  SearchMetrics Application
   """
 
   use Application

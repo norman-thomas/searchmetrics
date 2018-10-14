@@ -1,4 +1,8 @@
 defmodule SearchMetrics.Interface.Spreadsheet do
+  @moduledoc """
+  Interface of helper to append rows to a Google spreadsheet
+  """
+
   @name __MODULE__
 
   @spec append_rows(list(keyword()), atom()) :: :ok

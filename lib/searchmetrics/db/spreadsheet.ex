@@ -1,4 +1,8 @@
 defmodule SearchMetrics.Spreadsheet do
+  @moduledoc """
+  Implementation of helper to append rows to a Google spreadsheet
+  """
+
   use GenServer
   require Logger
 
@@ -31,7 +35,7 @@ defmodule SearchMetrics.Spreadsheet do
   @impl true
   def handle_cast({:append, type, [[_ | _] | _] = rows}, state) do
     rows
-    |> Enum.map(&append(state, type, &1))
+    |> Enum.each(&append(state, type, &1))
 
     {:noreply, state}
   end

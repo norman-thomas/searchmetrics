@@ -58,7 +58,8 @@ defmodule SearchMetrics.Parser do
   end
 
   defp parse(html, :geo) do
-    Floki.find(html, @css_accessor_geo)
+    html
+    |> Floki.find(@css_accessor_geo)
     |> Enum.map(&parse_geo/1)
   end
 
@@ -69,23 +70,27 @@ defmodule SearchMetrics.Parser do
     value_path = ["data", "chart", "series", 0, "data"]
 
     dates =
-      deep_get(data, date_path)
+      data
+      |> deep_get(date_path)
       |> Enum.map(&parse_date/1)
 
     values =
-      deep_get(data, value_path)
+      data
+      |> deep_get(value_path)
       |> Enum.map(&Map.fetch!(&1, "y"))
 
     Enum.zip(dates, values)
   end
 
   defp deep_get(%{} = m, [h | t]) do
-    Map.fetch!(m, h)
+    m
+    |> Map.fetch!(h)
     |> deep_get(t)
   end
 
   defp deep_get([_ | _] = m, [h | t]) when is_integer(h) do
-    Enum.fetch!(m, h)
+    m
+    |> Enum.fetch!(h)
     |> deep_get(t)
   end
 

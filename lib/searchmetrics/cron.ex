@@ -1,4 +1,8 @@
 defmodule SearchMetrics.Cron do
+  @moduledoc """
+  Cron which takes care of scheduling the download, parsing and storing of searchmetrics data
+  """
+
   use GenServer
   require Logger
 
@@ -45,13 +49,13 @@ defmodule SearchMetrics.Cron do
     Process.send_after(self(), :cron, ms)
   end
 
-  defp work() do
+  def work() do
     Logger.debug("Executing cron...")
 
     data =
       get_domains()
       |> Enum.map(&CrawlerService.execute/1)
-      |> Enum.reject(fn item -> length(item) == 0 end)
+      |> Enum.reject(&Enum.empty?/1)
 
     data
     |> Enum.map(&overview_row/1)
@@ -66,7 +70,8 @@ defmodule SearchMetrics.Cron do
 
   @spec get_domains() :: list(String.t())
   defp get_domains() do
-    File.read!(@domains_file)
+    @domains_file
+    |> File.read!()
     |> String.split("\n")
     |> Enum.reject(&(String.length(&1) < 4))
   end
@@ -89,7 +94,8 @@ defmodule SearchMetrics.Cron do
   def social_rows(data) do
     to_add = [date: deep_get(data, [:date]), domain: deep_get(data, [:domain])]
 
-    deep_get(data, [:social])
+    data
+    |> deep_get([:social])
     |> Enum.map(fn row -> to_add ++ row end)
   end
 end

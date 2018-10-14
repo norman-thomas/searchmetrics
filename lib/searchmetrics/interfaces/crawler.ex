@@ -1,4 +1,8 @@
 defmodule SearchMetrics.Interface.CrawlerService do
+  @moduledoc """
+    Interface of crawler service to download
+    the searchmetrics page for a given domain
+  """
   require Logger
 
   @name __MODULE__
