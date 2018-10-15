@@ -29,7 +29,7 @@ use Mix.Config
 #
 #     import_config "#{Mix.env()}.exs"
 
-config :logger, level: :info
+config :logger, level: :debug
 
 config :bypass, adapter: Plug.Adapters.Cowboy2
 

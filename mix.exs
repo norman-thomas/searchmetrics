@@ -29,8 +29,7 @@ defmodule SearchMetrics.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :httpoison, :elixir_google_spreadsheets],
-      applications: [:timex],
+      extra_applications: [:logger, :httpoison, :timex, :elixir_google_spreadsheets],
       mod: {SearchMetrics, []}
     ]
   end
@@ -38,7 +37,9 @@ defmodule SearchMetrics.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:observer_cli, "~> 1.4", only: :dev},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:inch_ex, github: "rrrene/inch_ex", only: [:dev, :test]},
       {:dialyxir, "~> 1.0.0-rc.3", only: [:dev], runtime: false},
       {:credo, "~> 0.10.2", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},

@@ -5,9 +5,6 @@ defmodule UtilsTest do
   
     test "gets the sub-element value from a dict" do
       data = %{}
-  
-      url = endpoint_url(bypass.port)
-      result = SearchMetrics.Crawler.fetch("grin.com", url)
     end
   end
   
