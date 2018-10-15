@@ -6,6 +6,7 @@ defmodule SearchMetrics.Crawler do
   require Logger
 
   @host "https://suite.searchmetrics.com"
+  @max_retries 3
 
   @country "DE"
   @metrics [:visibility, :geo, :rank, :social, :visibility_history]
@@ -18,16 +19,35 @@ defmodule SearchMetrics.Crawler do
     end
   end
 
-  defp request({url, params}) do
+  defp request({url, params}, retries \\ 0) do
     Logger.debug(fn -> "REQUESTing #{url} with #{inspect(params)}" end)
 
-    %HTTPoison.Response{body: response} =
-      HTTPoison.post!(url, params, %{
-        "Content-Type" => "application/x-www-form-urlencoded",
-        "Cache-Control" => "no-cache"
-      })
+    response =
+      HTTPoison.post(
+        url,
+        params,
+        %{
+          "Content-Type" => "application/x-www-form-urlencoded",
+          "Cache-Control" => "no-cache"
+        },
+        timeout: 30_000,
+        recv_timeout: 30_000
+      )
 
-    response
+    case response do
+      {:ok, %HTTPoison.Response{body: content, status_code: 200}} ->
+        content
+
+      {:error, reason} ->
+        Logger.error("ERROR while fetching #{url} with #{inspect(params)}")
+        :timer.sleep(1000)
+
+        if retries < @max_retries do
+          request({url, params}, retries + 1)
+        else
+          {:error, reason}
+        end
+    end
   end
 
   defp build_body(kwl) when is_list(kwl) do

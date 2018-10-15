@@ -7,8 +7,8 @@ defmodule SearchMetrics.Interface.CrawlerService do
 
   @name __MODULE__
 
-  # 15 sec timeout
-  @timeout 15_000
+  # 20 sec timeout
+  @timeout 20_000
 
   @doc """
   Fetches and parses the searchmetrics page for a given domain

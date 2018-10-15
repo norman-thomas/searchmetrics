@@ -1,8 +1,6 @@
 defmodule SearchMetricsTest do
   use ExUnit.Case, async: true
 
-  doctest SearchMetrics.Utils
-
   setup do
     bypass = Bypass.open()
     {:ok, bypass: bypass}
